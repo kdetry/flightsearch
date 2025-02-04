@@ -2,6 +2,10 @@
 
 A modern flight search application built with React, TypeScript, and Material-UI that mimics the functionality of Google Flights. This project demonstrates the implementation of a performant flight search interface with real-time filtering capabilities.
 
+## 📸 Screenshot
+
+![Google Flights Clone Screenshot](/public/screenshot.jpg)
+
 ## 🚀 Features
 
 - **Advanced Flight Search**
@@ -161,7 +165,3 @@ MIT License - see the [LICENSE](LICENSE) file for details
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## 🤝 Support
-
-For support, email [your-email@example.com](mailto:your-email@example.com) or open an issue in the repository.
