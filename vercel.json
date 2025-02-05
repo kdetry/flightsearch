@@ -1,13 +1,11 @@
 {
     "version": 2,
+    "buildCommand": "npm run vercel-build",
+    "outputDirectory": "dist",
     "builds": [
         {
             "src": "dist-server/index.js",
             "use": "@vercel/node"
-        },
-        {
-            "src": "dist/**",
-            "use": "@vercel/static"
         }
     ],
     "routes": [
@@ -16,19 +14,11 @@
             "dest": "dist-server/index.js"
         },
         {
-            "src": "^/assets/(.*)",
-            "dest": "dist/assets/$1"
-        },
-        {
-            "src": "^/favicon.ico",
-            "dest": "dist/favicon.ico"
-        },
-        {
             "handle": "filesystem"
         },
         {
             "src": "/(.*)",
-            "dest": "dist/index.html"
+            "dest": "/index.html"
         }
     ]
 }
