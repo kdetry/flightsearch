@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import {
-    Select,
-    MenuItem,
     Box,
     Typography,
     IconButton,
     Popover,
     Stack,
-    SelectChangeEvent,
 } from '@mui/material';
 import {
     Person,
@@ -51,7 +48,6 @@ interface PassengerCountProps {
 export default function PassengerCount({
     value,
     onChange,
-    className,
 }: PassengerCountProps) {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);

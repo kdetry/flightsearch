@@ -14,13 +14,12 @@ import {
     returnDateAtom,
     passengersAtom,
     seatTypeAtom,
-    LocationValue,
 } from '../store/atoms';
 import PassengerSelect from './PassengerSelect';
 import SeatTypeSelect from './SeatTypeSelect';
 import TripTypeSelect from './TripTypeSelect';
 import { format } from 'date-fns';
-import { flightsAtom } from '../store/flightsAtom';
+import { flightsAtom, SearchResponse } from '../store/flightsAtom';
 
 export default function FlightSearchForm() {
     const theme = useTheme();
@@ -139,7 +138,7 @@ export default function FlightSearchForm() {
             });
 
             if (response.status) {
-                setFlights(response.data);
+                setFlights(response.data as SearchResponse);
                 navigate(`/search`);
             } else {
                 // Handle error case
@@ -177,7 +176,7 @@ export default function FlightSearchForm() {
                                 value={fromOptions.find((option) => option.code === from.code) || null}
                                 onChange={handleFromChange}
                                 inputValue={fromInput}
-                                onInputChange={(event, newInputValue, reason) => {
+                                onInputChange={(_, newInputValue, reason) => {
                                     if (reason === 'input') {
                                         setFromInput(newInputValue);
                                     }
@@ -211,7 +210,7 @@ export default function FlightSearchForm() {
                                 value={toOptions.find((option) => option.code === to.code) || null}
                                 onChange={handleToChange}
                                 inputValue={toInput}
-                                onInputChange={(event, newInputValue, reason) => {
+                                onInputChange={(_, newInputValue, reason) => {
                                     if (reason === 'input') {
                                         setToInput(newInputValue);
                                     }

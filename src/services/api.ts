@@ -1,3 +1,5 @@
+import { SearchResponse } from '../store/flightsAtom';
+
 export type ApiResponse<T> = {
   status: boolean;
   data: T;
@@ -92,7 +94,7 @@ export async function searchAirports(query: string): Promise<ApiResponse<Airport
   }
 }
 
-export async function searchFlights(params: SearchFlightsParams): Promise<ApiResponse<Flight[]>> {
+export async function searchFlights(params: SearchFlightsParams): Promise<ApiResponse<SearchResponse>> {
   try {
     const searchParams = new URLSearchParams({
       originSkyId: params.originSkyId,
@@ -123,6 +125,26 @@ export async function searchFlights(params: SearchFlightsParams): Promise<ApiRes
     return data;
   } catch (error) {
     console.error('Error searching flights:', error);
-    return { status: false, data: [], message: 'Error searching flights' };
+    return {
+      status: false,
+      data: {
+        context: { status: 'error', totalResults: 0 },
+        itineraries: [],
+        messages: [],
+        filterStats: {
+          duration: { min: 0, max: 0, multiCityMin: 0, multiCityMax: 0 },
+          airports: [],
+          carriers: [],
+          stopPrices: {
+            direct: { isPresent: false, formattedPrice: '$0' },
+            one: { isPresent: false, formattedPrice: '$0' },
+            twoOrMore: { isPresent: false, formattedPrice: '$0' }
+          }
+        },
+        flightsSessionId: '',
+        destinationImageUrl: ''
+      },
+      message: 'Error searching flights'
+    };
   }
 } 

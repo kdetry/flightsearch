@@ -1,7 +1,6 @@
 import { Box, Container, Typography, IconButton } from '@mui/material';
 import { Brightness4, Brightness7 } from '@mui/icons-material';
 import FlightSearchForm from '../components/FlightSearchForm';
-import PopularDestinations from '../components/PopularDestinations';
 import { useAtom } from 'jotai';
 import { themeModeAtom } from '../store/atoms';
 

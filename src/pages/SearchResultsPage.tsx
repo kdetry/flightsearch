@@ -4,23 +4,12 @@ import {
   Box,
   Container,
   Typography,
-  Paper,
   Grid,
-  Card,
-  CardContent,
-  Divider,
-  Chip,
-  FormControl,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-  Slider,
   Stack,
-  Avatar,
 } from '@mui/material';
 import { format } from 'date-fns';
 import { flightSearchAtom } from '../store/atoms';
-import { flightsAtom, SearchResponse, FlightItinerary } from '../store/flightsAtom';
+import { flightsAtom, FlightItinerary } from '../store/flightsAtom';
 import FlightCard from '../components/FlightCard';
 import SearchFilters from '../components/SearchFilters';
 
@@ -45,11 +34,6 @@ const SearchResultsPage = () => {
       </Container>
     );
   }
-
-  const airlines = flightResults.filterStats.carriers.reduce((acc: Record<string, boolean>, carrier) => {
-    acc[carrier.name] = true;
-    return acc;
-  }, {});
 
   const handleStopFilterChange = useCallback((type: keyof typeof filters.stops) => {
     setFilters(prev => ({
@@ -88,7 +72,12 @@ const SearchResultsPage = () => {
       if (flight.price.raw < filters.priceRange[0] || flight.price.raw > filters.priceRange[1]) return false;
 
       const airline = flight.legs[0].carriers.marketing[0].name;
-      if (Object.keys(filters.airlines).length > 0 && !filters.airlines[airline]) return false;
+
+      const keys = Object.keys(filters.airlines)
+
+      const isThereAnyAirlineSelected = keys.some(key => filters.airlines[key])
+
+      if (isThereAnyAirlineSelected && !filters.airlines[airline]) return false;
 
       return true;
     });
