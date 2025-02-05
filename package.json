@@ -10,7 +10,7 @@
     "build": "tsc -b && vite build",
     "build:server": "tsc -p tsconfig.server.json",
     "start": "NODE_ENV=production node dist-server/index.js",
-    "deploy-build": "npm run build && npm run build:server",
+    "vercel-build": "npm run build && npm run build:server",
     "lint": "eslint .",
     "preview": "vite preview"
   },
